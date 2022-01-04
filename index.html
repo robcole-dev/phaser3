@@ -1,12 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Making your first Phaser 3 Game - Part 1</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-    
+
+<script type="text/javascript">
+
+    var config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: {y: 300},
+                debug: false
+            }
+        },
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var game = new Phaser.Game(config);
+
+    function preload ()
+    {
+        this.load.image('sky','assets/image/sky.png');
+        this.load.image('ground','assets/image/platform.png');
+        this.load.image('star','assets/image/star.png');
+        this.load.image('bomb','assets/image/bomb.png');
+        this.load.spritesheet('dude', 'assets/image/dude.png',{frameWidth: 32, frameHeight: 48});
+    }
+
+    var platforms;
+
+    function create ()
+    {
+        this.add.image(400, 300, 'sky');
+
+        platforms = this.physics.add.staticGroup();
+
+        platforms.create(400,568, 'ground').setScale(2).refreshBody();
+
+        platforms.create(600,400, 'ground');
+        platforms.create(50,250,'ground');
+        platforms.create(750,220,'ground');
+    }
+
+    function update ()
+    {
+    }
+
+</script>
+
 </body>
 </html>
